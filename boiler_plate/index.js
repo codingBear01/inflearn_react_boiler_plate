@@ -1,7 +1,8 @@
+// express 불러오기
 const express = require('express');
 const app = express();
 const port = 5000;
-
+// Mongoose 활용하여 MongoDB와 연결
 const mongoose = require('mongoose');
 mongoose
   .connect(
