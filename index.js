@@ -73,6 +73,7 @@ app.post('/api/users/login', (req, res) => {
   });
 });
 
+// Authentification
 app.get('/api/users/auth', auth, (req, res) => {
   // auth 전부 통과하면 아래 기능 실행
   res.status(200).json({
@@ -84,6 +85,16 @@ app.get('/api/users/auth', auth, (req, res) => {
     lastname: req.user.lastname,
     role: req.user.role,
     image: req.user.image,
+  });
+});
+
+// Log out
+app.get('/api/users/logout', auth, (req, res) => {
+  User.findOneAndUpdate({ _id: req.user._id }, { token: '' }, (err, user) => {
+    if (err) return res.json({ success: false, err });
+    return res.status(200).send({
+      success: true,
+    });
   });
 });
 
